@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAFO — BI Norwegian Business School Keynote</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0a;
+}
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+:root {
+    --title-size: clamp(2.5rem, 7vw, 6rem);
+    --h2-size: clamp(1.8rem, 5vw, 4rem);
+    --h3-size: clamp(1.2rem, 3vw, 2.2rem);
+    --body-size: clamp(0.85rem, 1.8vw, 1.4rem);
+    --small-size: clamp(0.7rem, 1.2vw, 1rem);
+    --slide-padding: clamp(1.5rem, 5vw, 5rem);
+    --content-gap: clamp(0.5rem, 2vw, 2rem);
+    --orange: #FF5722;
+    --lime: #D4E157;
+    --lime-bg: #e8f5a3;
+    --dark: #0a0a0a;
+    --light: #f5f5f0;
+}
+
+/* --- Video slide --- */
+.slide--video { background: #000; padding: 0; }
+.slide--video video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* --- Speaker card --- */
+.slide--speaker {
+    background: #ffffff;
+    padding: var(--slide-padding);
+    text-align: center;
+}
+.speaker-logo {
+    max-width: min(55%, 380px);
+    height: auto;
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+.speaker-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(3rem, 8vw, 8rem);
+    width: min(90%, 900px);
+}
+.speaker-qr img {
+    width: clamp(150px, 22vw, 280px);
+    height: auto;
+}
+.speaker-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+.speaker-photo {
+    width: clamp(120px, 18vw, 220px);
+    height: clamp(120px, 18vw, 220px);
+    border-radius: 50%;
+    object-fit: cover;
+}
+.speaker-name {
+    font-size: var(--h2-size);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+.speaker-role {
+    font-size: var(--small-size);
+    font-family: 'Space Mono', monospace;
+    opacity: 0.4;
+    margin: 0;
+}
+
+/* --- Quote slides --- */
+.slide--quote {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: var(--slide-padding);
+}
+.slide--quote .quote-text {
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 85%;
+}
+.slide--quote .quote-mark {
+    font-size: clamp(4rem, 10vw, 10rem);
+    color: rgba(255,255,255,0.15);
+    line-height: 0.5;
+    margin-bottom: clamp(0.5rem, 2vw, 1.5rem);
+}
+.slide--quote .attribution {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.7rem, 1.2vw, 1.1rem);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: clamp(1rem, 3vw, 2.5rem);
+    opacity: 0.35;
+}
+
+/* --- Insight slides --- */
+.slide--insight {
+    background: var(--lime-bg);
+    color: var(--dark);
+    padding: var(--slide-padding);
+    text-align: center;
+}
+.slide--insight .insight-number {
+    width: clamp(2.5rem, 5vw, 4rem);
+    height: clamp(2.5rem, 5vw, 4rem);
+    background: var(--dark);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    position: absolute;
+    top: clamp(1rem, 3vw, 2.5rem);
+    left: clamp(1rem, 3vw, 2.5rem);
+}
+.slide--insight .insight-text {
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    max-width: 85%;
+}
+
+/* --- Impact slides --- */
+.slide--impact {
+    background: var(--orange);
+    color: white;
+    padding: var(--slide-padding);
+    text-align: center;
+}
+.slide--impact .impact-text {
+    font-size: clamp(2.2rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    max-width: 90%;
+}
+
+/* --- Content slides --- */
+.slide--content {
+    background: var(--light);
+    color: var(--dark);
+    padding: var(--slide-padding);
+}
+.slide--content h2 {
+    font-size: var(--h2-size);
+    font-weight: 900;
+    margin: 0 0 var(--content-gap) 0;
+}
+
+/* --- Dark content slides --- */
+.slide--dark {
+    background: var(--dark);
+    color: white;
+    padding: var(--slide-padding);
+    text-align: center;
+}
+.slide--dark h2 {
+    font-size: var(--title-size);
+    font-weight: 900;
+    margin: 0 0 var(--content-gap) 0;
+}
+
+/* --- Dramatic text --- */
+.slide--dramatic {
+    background: var(--light);
+    text-align: center;
+}
+.slide--dramatic .dramatic-text {
+    font-size: clamp(6rem, 20vw, 18rem);
+    font-weight: 900;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+}
+
+/* --- Background image utility --- */
+.slide-bg-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+}
+.slide-bg-img.dimmed { opacity: 0.3; }
+.slide-bg-img.faded { opacity: 0.12; }
+
+/* Layer cake */
+.layer-cake {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.25rem, 0.6vw, 0.5rem);
+    align-items: center;
+    width: min(90%, 900px);
+}
+.layer {
+    background: var(--orange);
+    color: var(--dark);
+    font-weight: 700;
+    font-size: var(--h3-size);
+    padding: clamp(0.5rem, 1.2vh, 1rem) clamp(1rem, 3vw, 2rem);
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Tri grid */
+.tri-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+    width: min(95%, 1100px);
+    margin-top: var(--content-gap);
+}
+.tri-card {
+    background: rgba(0,0,0,0.05);
+    border-radius: 12px;
+    padding: clamp(0.8rem, 2vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.3rem, 0.8vw, 0.6rem);
+}
+.tri-card h3 { font-size: var(--h3-size); font-weight: 900; margin: 0; color: var(--orange); }
+.tri-card .subtitle { font-size: var(--small-size); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin: 0; }
+.tri-card ul { margin: 0; padding-left: 1.2em; font-size: var(--body-size); line-height: 1.45; }
+.tri-card li { margin-bottom: 0.25em; }
+
+/* Quadrant */
+/* Quadrant grid: narrow axis column, two equal content columns */
+.quadrant-wrap {
+    display: grid;
+    grid-template-columns: 2.2em 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    gap: clamp(0.15rem, 0.4vw, 0.4rem);
+    width: min(92%, 950px);
+    height: min(68vh, 540px);
+}
+.axis-label {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+}
+/* Top axis: spans both content columns */
+.axis-label.top { grid-column: 2 / 4; grid-row: 1; padding-bottom: 0.3em; }
+/* Left axis: vertical with endpoints */
+.axis-label.left {
+    grid-column: 1; grid-row: 2 / 4;
+    writing-mode: vertical-lr; transform: rotate(180deg);
+    white-space: nowrap; padding: 0;
+    font-size: clamp(0.5rem, 0.8vw, 0.7rem);
+    display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+    gap: 0.5em;
+}
+.axis-label.left .axis-endpoint { font-weight: 400; }
+.axis-label.left .axis-title { font-weight: 700; }
+/* Bottom axis: x-axis title */
+.axis-label.bottom { grid-column: 1 / 4; grid-row: 4; padding-top: 0.4em; font-weight: 700; }
+
+/* Quadrant cells */
+.q-cell { padding: clamp(0.6rem, 1.5vw, 1.3rem); display: flex; flex-direction: column; justify-content: center; }
+.q-cell h4 { font-size: clamp(0.95rem, 1.8vw, 1.5rem); font-weight: 900; margin: 0 0 0.15em 0; letter-spacing: 0.02em; }
+.q-cell .q-subtitle { font-size: clamp(0.6rem, 1vw, 0.8rem); opacity: 0.5; margin: 0 0 0.8em 0; }
+.q-cell .q-value { font-size: clamp(0.7rem, 1.2vw, 1rem); font-weight: 700; margin: 0 0 0.5em 0; line-height: 1.3; }
+.q-cell .q-examples { font-size: clamp(0.55rem, 0.9vw, 0.78rem); opacity: 0.4; font-style: italic; line-height: 1.35; }
+
+/* Quadrant colors */
+.q-augment h4, .q-augment .q-value { color: #6a1b9a; }
+.q-own h4, .q-own .q-value { color: #d84315; }
+.q-delegate h4 { color: var(--dark); } .q-delegate .q-value { color: var(--dark); font-weight: 700; }
+.q-orchestrate h4, .q-orchestrate .q-value { color: #1565c0; }
+.q-augment { background: #ede7f6; }
+.q-own { background: #fff3e0; }
+.q-delegate { background: #fce4ec; }
+.q-orchestrate { background: #e3f2fd; }
+
+/* Zone of Interest */
+.zone-wrap { position: relative; width: min(80%, 700px); height: min(55vh, 450px); }
+.zone-outer { position: absolute; inset: 0; background: #66ff66; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.zone-inner {
+    width: 40%; height: 50%;
+    background: white; border-radius: 8px; border: 3px solid var(--dark);
+    box-shadow: -20px -15px 0 -3px var(--dark), 20px 15px 0 -3px var(--dark), -15px 20px 0 -3px var(--dark), 15px -20px 0 -3px var(--dark), -25px 0 0 -3px var(--dark), 25px 5px 0 -3px var(--dark);
+}
+.zone-label { position: absolute; font-weight: 700; font-size: var(--body-size); max-width: 40%; }
+.zone-label.left { left: 3%; top: 50%; transform: translateY(-50%); text-align: left; }
+.zone-label.right { right: 3%; top: 25%; text-align: left; }
+.zone-label .label-title { font-size: var(--h2-size); font-weight: 900; }
+.zone-label .label-sub { font-size: var(--body-size); opacity: 0.7; margin-top: 0.3em; }
+
+/* Annotations */
+.annotation {
+    position: absolute;
+    font-family: 'Space Mono', monospace;
+    font-size: var(--body-size);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3em 0.8em;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+/* Money line */
+.money-line { font-size: clamp(1.5rem, 3.8vw, 3.2rem); font-weight: 700; line-height: 1.35; max-width: 80%; text-align: center; color: white; }
+
+/* Reason cards */
+.reasons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.5rem, 1.5vw, 1rem); width: min(90%, 800px); margin-top: var(--content-gap); }
+.reason-card { background: rgba(0,0,0,0.04); padding: clamp(0.6rem, 1.5vw, 1.2rem); }
+.reason-card .reason-num { font-family: 'Space Mono', monospace; font-size: var(--body-size); color: var(--orange); font-weight: 700; }
+.reason-card h4 { font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 900; margin: 0.2em 0; }
+.reason-card p { font-size: var(--body-size); margin: 0; opacity: 0.7; line-height: 1.4; }
+
+/* Genome */
+.genome-wrap { display: flex; align-items: center; gap: clamp(1.5rem, 4vw, 3rem); width: min(90%, 900px); }
+.genome-text { flex: 1; }
+.genome-text h3 { font-size: var(--h2-size); margin: 0 0 0.5em 0; font-weight: 900; }
+.genome-text p { font-size: var(--h3-size); line-height: 1.4; margin: 0 0 0.8em 0; opacity: 0.8; }
+.genome-text .label { text-decoration: underline; font-weight: 900; }
+.genome-visual { flex: 0 0 40%; display: flex; justify-content: center; }
+
+/* Person quote */
+.person-quote { display: flex; align-items: center; gap: clamp(1.5rem, 4vw, 3rem); width: min(90%, 900px); }
+.person-info { flex: 1; }
+.person-info .person-name { font-size: var(--h2-size); font-weight: 900; margin: 0; }
+.person-info .person-role { font-size: var(--small-size); opacity: 0.6; margin: 0.3em 0 1em 0; font-family: 'Space Mono', monospace; }
+.person-info .person-text { font-size: clamp(1.3rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.25; }
+.person-img { flex: 0 0 35%; display: flex; justify-content: center; }
+.avatar-placeholder {
+    width: clamp(100px, 15vw, 180px); height: clamp(100px, 15vw, 180px);
+    border-radius: 50%; background: linear-gradient(135deg, #ff69b4, #4169e1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(2rem, 5vw, 4rem); color: white; font-weight: 900;
+}
+
+/* Abundance */
+.slide--abundance { background: var(--dark); color: white; text-align: center; padding: var(--slide-padding); }
+
+/* Footer */
+.slide-footer {
+    position: absolute;
+    bottom: clamp(0.5rem, 1.5vw, 1.2rem);
+    right: clamp(0.8rem, 2vw, 1.5rem);
+    font-size: clamp(0.55rem, 0.8vw, 0.75rem);
+    opacity: 0.35;
+    font-family: 'Space Mono', monospace;
+}
+
+/* Slide chooser overlay */
+.chooser-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.95);
+    z-index: 2000;
+    display: none;
+    overflow-y: auto;
+    padding: clamp(1rem,3vw,2.5rem);
+    box-sizing: border-box;
+}
+.chooser-overlay.active { display: block; }
+.chooser-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: clamp(0.8rem, 1.5vw, 1.2rem);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.chooser-thumb {
+    aspect-ratio: 16/9;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    background: #1a1a1a;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.chooser-thumb:hover { border-color: var(--orange); transform: scale(1.03); }
+.chooser-thumb.current { border-color: var(--orange); }
+.chooser-thumb-inner {
+    width: 1920px; height: 1080px;
+    transform-origin: top left;
+    pointer-events: none;
+    position: absolute; top: 0; left: 0;
+}
+.chooser-thumb-num {
+    position: absolute; bottom: 6px; right: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    z-index: 1;
+}
+.chooser-close {
+    position: fixed; top: clamp(0.8rem,2vw,1.5rem); right: clamp(0.8rem,2vw,1.5rem);
+    font-size: 2rem; color: white; opacity: 0.5;
+    cursor: pointer; z-index: 2001; background: none; border: none;
+    font-family: 'Inter', sans-serif; transition: opacity 0.2s;
+}
+.chooser-close:hover { opacity: 1; }
+
+
+/* Progress + dots */
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--orange); z-index: 1000; transition: width 0.3s ease; }
+.nav-dots { position: fixed; right: clamp(0.5rem, 1.5vw, 1rem); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 6px; z-index: 100; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(128,128,128,0.3); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
+.nav-dot.active { background: var(--orange); transform: scale(1.4); }
+
+/* Animations */
+.reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+.reveal-d5 { transition-delay: 0.5s; }
+.reveal-d6 { transition-delay: 0.6s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tri-grid { grid-template-columns: 1fr; }
+    .quadrant-wrap { height: min(65vh, 450px); }
+    .nav-dots { display: none; }
+    .speaker-layout { flex-direction: column; gap: 2rem; }
+}
+@media (max-height: 600px) {
+    .nav-dots { display: none; }
+    :root { --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem); --title-size: clamp(1.5rem, 5vw, 2.8rem); --h2-size: clamp(1.2rem, 3.5vw, 2rem); --body-size: clamp(0.7rem, 1.3vw, 1rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+    html { scroll-behavior: auto; }
+}
+@media print {
+    html { scroll-snap-type: none; }
+    body { background: white; }
+    .progress, .nav-dots, .chooser-overlay { display: none !important; }
+    .slide {
+        width: 100vw; height: 100vh;
+        page-break-after: always;
+        page-break-inside: avoid;
+        break-after: page;
+        break-inside: avoid;
+        scroll-snap-align: none;
+        overflow: visible;
+    }
+    .slide:last-child { page-break-after: auto; break-after: auto; }
+    /* Force all reveals visible */
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    /* Force background images to print */
+    .slide-bg-img { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- Slide chooser -->
+<div class="chooser-overlay" id="chooser">
+    <button class="chooser-close" id="chooserClose">&times;</button>
+    <div class="chooser-grid" id="chooserGrid"></div>
+</div>
+
+
+
+<!-- ==========================================
+     SLIDE 1: VIDEO OPENER
+     ========================================== -->
+<section class="slide slide--video" data-section="open">
+    <video autoplay muted loop playsinline>
+        <source src="assets/stone_hit_water_video.mp4" type="video/mp4">
+    </video>
+</section>
+
+<!-- ==========================================
+     SLIDE 2: SPEAKER CARD
+     ========================================== -->
+<section class="slide slide--speaker" data-section="open">
+    <img class="speaker-logo reveal" src="assets/capgemini_invent_logo.png" alt="Capgemini Invent">
+    <div class="speaker-layout reveal reveal-d1">
+        <div class="speaker-qr">
+            <img src="assets/qr.png" alt="QR Code">
+        </div>
+        <div class="speaker-identity">
+            <img class="speaker-photo" src="assets/thordur_bw_on_white_photo.png" alt="Thordur Arnason">
+            <div class="speaker-name">Thordur Arnason</div>
+            <div class="speaker-role">Global Head of AI Enablement & GTM</div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     OPEN: THE WAKE-UP (3-6)
+     ========================================== -->
+
+<!-- 3: Gibson -->
+<section class="slide slide--quote" data-section="open">
+    <div class="quote-text reveal">The future is already here – it's just not evenly distributed.</div>
+    <div class="attribution reveal reveal-d1">William Gibson, 1992-ish</div>
+</section>
+
+<!-- 4: Thordur -->
+<section class="slide slide--quote" data-section="open">
+    <div class="quote-text reveal">The future is here<br>– but unevenly activated</div>
+    <div class="attribution reveal reveal-d1">Thordur, 2022</div>
+</section>
+
+<!-- 5: FAFO -->
+<section class="slide slide--dramatic" data-section="open" style="background:#ffffff;">
+    <div class="dramatic-text reveal">FAFO</div>
+</section>
+
+<!-- 6: Stop f***king around -->
+<section class="slide slide--impact" data-section="open">
+    <div class="impact-text reveal">Stop f***king around<br>Start finding out</div>
+</section>
+
+<!-- ==========================================
+     ACT 1: THE WORLD IS MOVING (7-10)
+     ========================================== -->
+
+<!-- 7: China AI Plus -->
+<section class="slide slide--dark" data-section="act1" style="text-align:left; padding-left:clamp(2rem,6vw,6rem);">
+    <div class="slide-bg-img dimmed" style="background-image:url('assets/bg_china.png')"></div>
+    <div style="max-width:min(90%,900px); position:relative; z-index:1;">
+        <h2 class="reveal" style="font-size:var(--title-size); margin-bottom:clamp(0.5rem,1.5vw,1rem);">"AI Plus", Beijing, Aug 26th 25</h2>
+        <p class="reveal reveal-d1" style="font-size:var(--h3-size); opacity:0.5; margin:0 0 clamp(0.8rem,2vw,1.5rem) 0; max-width:80%;">State Council guideline: expand AI across research, industry, public services, and governance.</p>
+        <div class="reveal reveal-d1" style="display:flex; flex-direction:column; gap:clamp(0.5rem,1.2vw,1rem);">
+            <div style="font-size:var(--h3-size); opacity:0.9;">
+                <strong style="color:var(--orange);">By 2027:</strong> AI agent adoption above 70%.
+            </div>
+            <div style="font-size:var(--h3-size); opacity:0.9;">
+                <strong style="color:var(--orange);">By 2030:</strong> Adoption above 90%. Intelligent economy as growth engine.
+            </div>
+            <div style="font-size:var(--h3-size); opacity:0.9;">
+                <strong style="color:var(--orange);">By 2035:</strong> Comprehensive intelligent economy and society.
+            </div>
+        </div>
+    </div>
+    <img src="assets/china_logo.png" alt="State Council PRC" style="position:absolute; bottom:clamp(0.5rem,1.5vw,1.2rem); left:clamp(0.8rem,2vw,1.5rem); height:clamp(20px,3vw,35px); opacity:0.5; z-index:1;">
+</section>
+
+<!-- 8: Sharp curve (Suleyman) -->
+<section class="slide slide--insight" data-section="act1">
+    <div class="insight-number reveal">1</div>
+    <div class="insight-text reveal">We are on a sharp curve of rising capabilities and falling costs</div>
+    <div class="attribution reveal reveal-d1" style="color:var(--dark); opacity:0.35;">Mustafa Suleyman, "The Coming Wave" 2023</div>
+</section>
+
+<!-- 9: Dog years -->
+<section class="slide slide--content" data-section="act1" style="background:#ffffff; overflow:hidden;">
+    <img src="assets/dog_time_illustration.png" alt="" class="reveal" style="position:absolute; bottom:-5%; left:-5%; width:clamp(250px,35vw,500px); opacity:0.9; pointer-events:none;">
+    <div style="text-align:center; max-width:min(90%,800px); position:relative; z-index:1;">
+        <h2 class="reveal" style="font-size:clamp(4rem, 12vw, 10rem); font-weight:900; margin-bottom:0.2em;">THINK IN<br>DOG YEARS</h2>
+        <p class="reveal reveal-d1" style="font-size:var(--h2-size); opacity:0.4; margin:0;">This is where the friction lives.</p>
+    </div>
+</section>
+
+<!-- 9b: Dog years table -->
+<section class="slide" data-section="act1" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <table class="reveal" style="border-collapse:collapse; width:min(92%,950px); font-family:'Inter',sans-serif;">
+        <thead>
+            <tr>
+                <th style="text-align:left; font-size:var(--small-size); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.35; padding:0 0 clamp(0.6rem,1.5vw,1rem) 0; border-bottom:2px solid #0a0a0a;">Business ritual</th>
+                <th style="text-align:right; font-size:var(--small-size); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.35; padding:0 0 clamp(0.6rem,1.5vw,1rem) 0; border-bottom:2px solid #0a0a0a;">Human time</th>
+                <th style="text-align:right; font-size:var(--small-size); font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); padding:0 0 clamp(0.6rem,1.5vw,1rem) 0; border-bottom:2px solid #0a0a0a;">AI time</th>
+            </tr>
+        </thead>
+        <tbody style="font-size:var(--h3-size);">
+            <tr style="border-bottom:1px solid rgba(0,0,0,0.08);">
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; font-weight:600;">Sprint</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; opacity:0.5;">2 weeks</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; font-weight:700; color:var(--orange);">2 days</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,0.08);">
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; font-weight:600;">Quarterly review</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; opacity:0.5;">3 months</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; font-weight:700; color:var(--orange);">~2 weeks</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(0,0,0,0.08);">
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; font-weight:600;">Annual budget</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; opacity:0.5;">1 year</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; font-weight:700; color:var(--orange);">~7 weeks</td>
+            </tr>
+            <tr>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; font-weight:900;">3-year strategy</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; opacity:0.5;">3 years</td>
+                <td style="padding:clamp(0.4rem,1vw,0.8rem) 0; text-align:right; font-weight:900; color:var(--orange); font-size:var(--h2-size);">~5 months</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="reveal reveal-d1" style="margin-top:clamp(1.5rem,3vw,2.5rem); font-size:var(--h3-size); font-weight:700; opacity:0.5; text-align:center; max-width:min(85%,700px);">Your sprint is a weekend. Your strategy covers one summer.</p>
+</section>
+
+<!-- 10: Layer cake -->
+<section class="slide slide--content" data-section="act1">
+    <div style="display:flex; align-items:center; gap:clamp(2rem,5vw,4rem); width:min(90%,900px);">
+        <div class="layer-cake reveal">
+            <div class="layer">Jobs and organizations</div>
+            <div class="layer">Applications</div>
+            <div class="layer" style="background:linear-gradient(90deg, var(--orange) 60%, #e8e8e8 60%);">AI models</div>
+            <div class="layer" style="background:#e8e8e8; color:var(--dark);">Cloud infrastructure</div>
+            <div class="layer" style="background:#e0e0e0; color:var(--dark);">Chips & computing</div>
+            <div class="layer" style="background:#d5d5d5; color:var(--dark);">Energy</div>
+        </div>
+    </div>
+    <div class="slide-footer">The six layer cake of AI, Arnason 2026</div>
+</section>
+
+<!-- 10b: Stone hit water -->
+<section class="slide slide--video" data-section="act1">
+    <video autoplay muted playsinline>
+        <source src="assets/ripples_cut.mp4" type="video/mp4">
+    </video>
+</section>
+
+<!-- ==========================================
+     ACT 2: THIS IS ABOUT YOU (11-15)
+     ========================================== -->
+
+<!-- 11: Lowering floor / raising ceiling -->
+<section class="slide slide--insight" data-section="act2">
+    <div class="insight-number reveal">2</div>
+    <div class="insight-text reveal">It's always about lowering the floor and raising the ceiling</div>
+</section>
+
+<!-- 12: What BI just activated -->
+<section class="slide slide--content" data-section="act2" style="align-items:center;">
+    <h2 class="reveal" style="text-align:center; margin-bottom:clamp(0.3rem,1vw,0.8rem);">What BI just activated</h2>
+    <p class="reveal" style="text-align:center; font-size:var(--small-size); opacity:0.35; margin:0 0 var(--content-gap) 0;">Free for all 21,000 students, faculty, and staff via Google Workspace for Education</p>
+    <div class="tri-grid reveal reveal-d1">
+        <div class="tri-card">
+            <h3>NotebookLM</h3>
+            <p class="subtitle">Your research department</p>
+            <ul>
+                <li>Upload 50 sources (PDFs, Docs, YouTube, audio)</li>
+                <li>Every answer grounded and cited</li>
+                <li>Audio Overviews: AI podcast from your sources</li>
+                <li>Video Overviews, mind maps, slide decks</li>
+                <li>Quizzes, flashcards, study guides</li>
+                <li>Feeds into Gemini as verified source</li>
+            </ul>
+        </div>
+        <div class="tri-card">
+            <h3>Deep Research</h3>
+            <p class="subtitle">Your autonomous analyst</p>
+            <ul>
+                <li>Browses 100+ web sources autonomously</li>
+                <li>Multi-page research reports with citations</li>
+                <li>Pulls from Gmail, Drive, Chat alongside web</li>
+                <li>Canvas: collaborative workspace for writing, code, prototypes</li>
+                <li>Custom Gems: specialized AI personas</li>
+            </ul>
+        </div>
+        <div class="tri-card">
+            <h3>Guided Learning</h3>
+            <p class="subtitle">Your Socratic tutor</p>
+            <ul>
+                <li>Built into Gemini 2.5 (learning science fine-tuned)</li>
+                <li>Won't give you the answer</li>
+                <li>Walks you through step by step</li>
+                <li>Checks your understanding</li>
+                <li>Uses images, YouTube inline</li>
+                <li>Makes you work. Builds the muscle.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 13: Pyramids crumbling -->
+<section class="slide" data-section="act2" style="background:#fbfbfb; padding:var(--slide-padding); overflow:hidden;">
+    <p class="reveal" style="font-family:'Space Mono',monospace; font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.35; color:var(--dark); margin:0 0 clamp(0.5rem,1.5vw,1rem) 0;">The pyramids are crumbling</p>
+    <img src="assets/pyramid_glitch_illustration.png" alt="" class="reveal" style="max-height:min(80vh,750px); max-width:min(90%,950px); object-fit:contain;">
+</section>
+
+<!-- 14: Four reasons -->
+<section class="slide slide--content" data-section="act2">
+    <h2 class="reveal" style="text-align:center;">Why the pyramid is crumbling</h2>
+    <div class="reasons-grid reveal reveal-d1">
+        <div class="reason-card">
+            <div class="reason-num">01</div>
+            <h4>The experience paradox</h4>
+            <p>A first-year with Deep Research produces third-year output. But the judgment is still years away.</p>
+        </div>
+        <div class="reason-card">
+            <div class="reason-num">02</div>
+            <h4>The mentor gap</h4>
+            <p>When AI becomes the default study partner, who teaches you to ask the right questions?</p>
+        </div>
+        <div class="reason-card">
+            <div class="reason-num">03</div>
+            <h4>The legitimacy dip</h4>
+            <p>When every deliverable looks polished, how do you prove substance behind the surface?</p>
+        </div>
+        <div class="reason-card">
+            <div class="reason-num">04</div>
+            <h4>The team glue loss</h4>
+            <p>If everyone outsources their part to AI, the group project dies. Collaboration requires friction.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 15: Money line -->
+<section class="slide slide--dark" data-section="act2">
+    <div class="money-line reveal">
+        The tool that makes you <span style="color:var(--orange);">look smart</span> and the tool that makes you <span style="color:var(--lime);">be smart</span> are the same tool, used differently
+    </div>
+</section>
+
+<!-- ==========================================
+     ACT 3: THE NEW SHAPE (16-20)
+     ========================================== -->
+
+<!-- 15b: Five anti-patterns -->
+<section class="slide" data-section="act3" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <h2 class="reveal" style="font-size:var(--h2-size); font-weight:900; text-align:center; margin:0 0 clamp(1.5rem,3vw,2.5rem) 0;">Five anti-patterns of human-AI chemistry</h2>
+    <div style="display:flex; flex-direction:column; gap:clamp(0.6rem,1.5vw,1.2rem); width:min(90%,800px);">
+        <div class="reveal reveal-d1" style="display:flex; gap:clamp(0.8rem,2vw,1.5rem); align-items:baseline;">
+            <span style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; flex-shrink:0;">01</span>
+            <div><span style="font-weight:900; font-size:var(--h3-size);">The Reverse-Centaur</span><br><span style="font-size:var(--body-size); opacity:0.5;">You become human middleware. Not augmented, just residual.</span></div>
+        </div>
+        <div class="reveal reveal-d2" style="display:flex; gap:clamp(0.8rem,2vw,1.5rem); align-items:baseline;">
+            <span style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; flex-shrink:0;">02</span>
+            <div><span style="font-weight:900; font-size:var(--h3-size);">Homer on a Loop</span><br><span style="font-size:var(--body-size); opacity:0.5;">You press approve. Token oversight, no real judgment.</span></div>
+        </div>
+        <div class="reveal reveal-d3" style="display:flex; gap:clamp(0.8rem,2vw,1.5rem); align-items:baseline;">
+            <span style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; flex-shrink:0;">03</span>
+            <div><span style="font-weight:900; font-size:var(--h3-size);">Magic Button Thinking</span><br><span style="font-size:var(--body-size); opacity:0.5;">One prompt, first output, done. A vending machine, not collaboration.</span></div>
+        </div>
+        <div class="reveal reveal-d4" style="display:flex; gap:clamp(0.8rem,2vw,1.5rem); align-items:baseline;">
+            <span style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; flex-shrink:0;">04</span>
+            <div><span style="font-weight:900; font-size:var(--h3-size);">The Atrophy Trap</span><br><span style="font-size:var(--body-size); opacity:0.5;">You delegate so gradually you don't notice the muscle disappearing.</span></div>
+        </div>
+        <div class="reveal reveal-d5" style="display:flex; gap:clamp(0.8rem,2vw,1.5rem); align-items:baseline;">
+            <span style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; flex-shrink:0;">05</span>
+            <div><span style="font-weight:900; font-size:var(--h3-size);">Sycophantopia</span><br><span style="font-size:var(--body-size); opacity:0.5;">AI agrees with everything. You lose the friction that produces better thinking.</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- 15c: Amodei -->
+<section class="slide slide--quote" data-section="act3">
+    <div class="quote-text reveal">Humanity is about to be handed almost unimaginable power, and it is deeply unclear whether our systems possess the maturity to wield it</div>
+    <div class="attribution reveal reveal-d1">Dario Amodei, "The Adolescence of Technology" 2026</div>
+</section>
+
+<!-- 16: Shape of craft to come -->
+<section class="slide" data-section="act3" style="background:#000000; padding:var(--slide-padding); overflow:hidden;">
+    <p class="reveal" style="font-family:'Space Mono',monospace; font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.35; color:white; margin:0 0 clamp(0.5rem,1.5vw,1rem) 0;">The shape of craft to come</p>
+    <img src="assets/Y_shape.png" alt="" class="reveal" style="max-height:min(75vh,700px); max-width:min(85%,900px); object-fit:contain;">
+</section>
+
+<!-- 17: I T Y -->
+<section class="slide" data-section="act3" style="background:#fdfcfd; padding:var(--slide-padding); text-align:center; overflow:hidden;">
+    <img src="assets/the_shapes_illustration.png" alt="I to T to Y" class="reveal" style="max-height:min(75vh,650px); max-width:min(90%,950px); object-fit:contain;">
+    <div class="slide-footer">The Y-shaped thesis, Arnason, Thorsmæhlum, 2025</div>
+</section>
+
+<!-- 18: New Professional Genome -->
+<section class="slide" data-section="act3" style="background:#ffffff; padding:var(--slide-padding); overflow:hidden;">
+    <p class="reveal" style="font-family:'Space Mono',monospace; font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.35; color:var(--dark); margin:0 0 clamp(0.3rem,1vw,0.5rem) 0;">The New Professional Genome</p>
+    <img src="assets/fat_y_glitch.png" alt="" class="reveal" style="max-height:min(50vh,420px); max-width:min(60%,500px); object-fit:contain; margin-bottom:clamp(0.5rem,1.5vw,1rem);">
+    <div class="reveal reveal-d1" style="display:flex; gap:clamp(2rem,5vw,4rem); width:min(90%,800px);">
+        <div style="flex:1;">
+            <div style="font-weight:900; font-size:var(--body-size); margin-bottom:0.3em;">The Stem</div>
+            <p style="font-size:var(--body-size); opacity:0.6; margin:0; line-height:1.4;">Deep AI-human fusion where craft and judgment get amplified, not replaced.</p>
+        </div>
+        <div style="flex:1;">
+            <div style="font-weight:900; font-size:var(--body-size); margin-bottom:0.3em;">The Split</div>
+            <p style="font-size:var(--body-size); opacity:0.6; margin:0; line-height:1.4;">Where interplay with adjacent crafts happens. Walls are thinner, rules are rewritten.</p>
+        </div>
+    </div>
+    <div class="slide-footer">The Y-shaped thesis, Arnason, Thorsmæhlum, 2025</div>
+</section>
+
+<!-- 19: Cyborgs of craft -->
+<section class="slide" data-section="act3" style="background:#fdfefd; padding:0; overflow:hidden;">
+    <div style="display:flex; align-items:center; width:100%; height:100%;">
+        <div class="reveal" style="flex:0 0 50%; height:100%; display:flex; align-items:center; justify-content:flex-end; padding-right:clamp(1rem,3vw,2rem);">
+            <img src="assets/cyborg_of_craft_illustration.png" alt="" style="max-height:85vh; max-width:100%; object-fit:contain;">
+        </div>
+        <div class="reveal" style="flex:1; padding-left:clamp(1rem,3vw,2rem); padding-right:var(--slide-padding);">
+            <div style="font-size:clamp(3rem,8vw,7rem); font-weight:900; color:var(--dark); line-height:0.95; letter-spacing:-0.02em;">Cyborgs<br>of craft</div>
+        </div>
+    </div>
+    <div class="slide-footer" style="color:var(--dark);">The Y-shaped thesis, Arnason, Thorsmæhlum, 2025</div>
+</section>
+
+<!-- 19b: Valentin -->
+<section class="slide" data-section="act3" style="background:var(--dark); padding:0; overflow:hidden;">
+    <div style="display:flex; width:100%; height:100%;">
+        <div class="reveal" style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:var(--slide-padding); padding-right:clamp(2rem,4vw,3rem);">
+            <div style="font-size:clamp(1.3rem,3vw,2.4rem); font-weight:700; color:white; line-height:1.25; margin-bottom:clamp(1.5rem,3vw,2.5rem);">I guess that when your system fits your brain, it disappears. You stop managing it and you start using it. That's when the leverage kicks in</div>
+            <div style="font-size:var(--h3-size); font-weight:900; color:white;">Valentin Marguet</div>
+            <div style="font-family:'Space Mono',monospace; font-size:var(--small-size); opacity:0.35; color:white; margin-top:0.3em;">Powertrain Project Lead, Ferrari 849 Testarossa | SF90XX Stradale</div>
+        </div>
+        <div class="reveal" style="flex:0 0 42%; height:100%; overflow:hidden;">
+            <img src="assets/valentin.jpeg" alt="Valentin Marguet" style="width:100%; height:100%; object-fit:cover; object-position:center top; filter:grayscale(1);">
+        </div>
+    </div>
+</section>
+
+<!-- 20: Lena -->
+<section class="slide" data-section="act3" style="background:var(--dark); padding:0; overflow:hidden;">
+    <div style="display:flex; width:100%; height:100%;">
+        <div class="reveal" style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:var(--slide-padding); padding-right:clamp(2rem,4vw,3rem);">
+            <div style="font-size:clamp(1.3rem,3vw,2.4rem); font-weight:700; color:white; line-height:1.25; margin-bottom:clamp(1.5rem,3vw,2.5rem);">Relentless curiosity and experimentation has fundamentally changed what I can do, and how I do my job</div>
+            <div style="font-size:var(--h3-size); font-weight:900; color:white;">Lena Thorsmæhlum</div>
+            <div style="font-family:'Space Mono',monospace; font-size:var(--small-size); opacity:0.35; color:white; margin-top:0.3em;">AX Designer, Cisco Collaboration Devices</div>
+        </div>
+        <div class="reveal" style="flex:0 0 42%; height:100%; overflow:hidden;">
+            <img src="assets/lena.jpg" alt="Lena Thorsmaehlum" style="width:100%; height:100%; object-fit:cover; object-position:center top;">
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     ACT 4: HOW TO WORK (21-25)
+     ========================================== -->
+
+<!-- 21: Expertise Value Quadrant (clean) -->
+<section class="slide slide--content" data-section="act4" style="align-items:center;">
+    <h2 class="reveal" style="text-align:center; font-size:var(--h2-size);">Expertise is all you need</h2>
+    <div class="quadrant-wrap reveal reveal-d1">
+        <div></div>
+        <div class="axis-label top" style="justify-content:space-between;"><span>Low Context</span><span style="font-weight:700;">CONTEXTUAL EMBEDDEDNESS</span><span>High Context</span></div>
+        <div class="axis-label left"><span class="axis-endpoint">Codifiable</span><span class="axis-title">TASK STRUCTURE</span><span class="axis-endpoint">Non-codifiable</span></div>
+        <div class="q-cell q-augment"><h4>AUGMENT</h4><div class="q-subtitle">Human leads, AI supports</div><div class="q-value">Creative direction<br>& iteration</div><div class="q-examples">Ideation, exploration, brainstorming</div></div>
+        <div class="q-cell q-own"><h4>OWN</h4><div class="q-subtitle">Pure human domain</div><div class="q-value">Irreplaceable judgment<br>& accountability</div><div class="q-examples">Stakeholder relationships, crisis decisions, sign-off</div></div>
+        <div class="q-cell q-delegate"><h4>DELEGATE</h4><div class="q-subtitle">AI executes fully</div><div class="q-value">Quality control<br>& task selection</div><div class="q-examples">Data entry, scheduling, standard code generation</div></div>
+        <div class="q-cell q-orchestrate"><h4>ORCHESTRATE</h4><div class="q-subtitle">AI assists, you direct</div><div class="q-value">Context injection<br>& judgment calls</div><div class="q-examples">Complex analysis, strategic drafting, problem-solving</div></div>
+        <div class="axis-label bottom">Cyborg quadrant, Arnason 2026</div>
+    </div>
+</section>
+
+<!-- 22: Expertise Value Quadrant (annotated) -->
+<section class="slide slide--content" data-section="act4" style="align-items:center;">
+    <h2 class="reveal" style="text-align:center; font-size:var(--h2-size);">Expertise is all you need</h2>
+    <div class="quadrant-wrap reveal reveal-d1" style="position:relative;">
+        <div></div>
+        <div class="axis-label top" style="justify-content:space-between;"><span>Low Context</span><span style="font-weight:700;">CONTEXTUAL EMBEDDEDNESS</span><span>High Context</span></div>
+        <div class="axis-label left"><span class="axis-endpoint">Codifiable</span><span class="axis-title">TASK STRUCTURE</span><span class="axis-endpoint">Non-codifiable</span></div>
+        <div class="q-cell q-augment"><h4>AUGMENT</h4><div class="q-subtitle">Human leads, AI supports</div><div class="q-value">Creative direction<br>& iteration</div></div>
+        <div class="q-cell q-own" style="position:relative;"><h4>OWN</h4><div class="q-subtitle">Pure human domain</div><div class="q-value">Irreplaceable judgment<br>& accountability</div><div class="annotation reveal reveal-d2" style="top:-1.5em;right:0.5em;background:var(--orange);color:white;">PROTECT YOUR TIME HERE</div></div>
+        <div class="q-cell q-delegate" style="position:relative;"><h4>DELEGATE</h4><div class="q-subtitle">AI executes fully</div><div class="q-value">Quality control<br>& task selection</div><div class="annotation reveal reveal-d3" style="bottom:-1.5em;left:0.5em;background:#2e7d32;color:white;">MOVE ROUTINE WORK HERE</div></div>
+        <div class="q-cell q-orchestrate"><h4>ORCHESTRATE</h4><div class="q-subtitle">AI assists, you direct</div><div class="q-value">Context injection<br>& judgment calls</div></div>
+        <!-- Diagonal banner: AUGMENT to ORCHESTRATE -->
+        <div class="reveal reveal-d4" style="position:absolute; top:50%; left:50%; width:130%; transform:translate(-50%,-50%) rotate(22deg); background:rgba(180,30,30,0.88); color:white; font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(0.8rem,1.8vw,1.4rem); text-transform:uppercase; letter-spacing:0.1em; text-align:center; padding:clamp(0.4rem,1vh,0.7rem) 0; pointer-events:none; z-index:10;">This is where you spend your cognitive budget</div>
+        <div class="axis-label bottom">Cyborg quadrant, Arnason 2026</div>
+    </div>
+</section>
+
+<!-- 23: Best/worst -->
+<section class="slide slide--insight" data-section="act4">
+    <div class="insight-number reveal">3</div>
+    <div class="insight-text reveal reveal-d1">The AI we work with today is the best we've had and the worst we'll ever have</div>
+</section>
+
+<!-- 24: Zone of Interest — Beat 1: The box we draw in our heads -->
+<section class="slide" data-section="act4" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <svg class="reveal" viewBox="0 0 700 500" style="width:min(85%,800px); height:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- The box: our mental model -->
+        <rect x="200" y="100" width="300" height="300" stroke="#0a0a0a" stroke-width="2.5"/>
+        <!-- Labels -->
+        <text x="350" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">AI IS</text>
+        <text x="350" y="282" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">BEST</text>
+        <text x="540" y="75" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">HUMANS</text>
+        <text x="540" y="102" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">ARE BEST</text>
+    </svg>
+    <div class="slide-footer">The Zone of Interest, Arnason 2025</div>
+</section>
+
+<!-- 24b: Zone of Interest — Beat 2: The jagged reality -->
+<section class="slide" data-section="act4" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <svg class="reveal" viewBox="0 0 700 500" style="width:min(85%,800px); height:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- The box stays: our assumption -->
+        <rect x="200" y="100" width="300" height="300" stroke="#0a0a0a" stroke-width="2.5"/>
+        <!-- The jagged shape: reality. Some spikes go OUTSIDE the box (AI is better than we thought). Some valleys stay INSIDE the box (AI is worse than we thought). Centered on the box center (350,250). -->
+        <polygon points="350,60 380,160 470,75 440,170 555,120 480,195 590,200 480,235 600,280 480,285 560,370 460,335 500,430 415,365 370,445 350,370 310,440 290,350 200,420 240,330 130,365 215,295 105,245 215,250 120,155 230,200 190,80 270,175" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+        <!-- Labels -->
+        <text x="350" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">AI IS</text>
+        <text x="350" y="282" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">BEST</text>
+        <text x="540" y="75" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">HUMANS</text>
+        <text x="540" y="102" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">ARE BEST</text>
+    </svg>
+    <div class="slide-footer">The Zone of Interest, Arnason 2025</div>
+</section>
+
+<!-- 24c: Zone of Interest — Beat 3: Dots showing miscalibration -->
+<section class="slide" data-section="act4" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <svg class="reveal" viewBox="0 0 700 500" style="width:min(85%,800px); height:auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- The box -->
+        <rect x="200" y="100" width="300" height="300" stroke="#0a0a0a" stroke-width="2.5"/>
+        <!-- The jagged shape -->
+        <polygon points="350,60 380,160 470,75 440,170 555,120 480,195 590,200 480,235 600,280 480,285 560,370 460,335 500,430 415,365 370,445 350,370 310,440 290,350 200,420 240,330 130,365 215,295 105,245 215,250 120,155 230,200 190,80 270,175" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+        <!-- Labels -->
+        <text x="350" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">AI IS</text>
+        <text x="350" y="282" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">BEST</text>
+        <text x="540" y="75" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">HUMANS</text>
+        <text x="540" y="102" text-anchor="start" font-family="Inter,sans-serif" font-weight="900" font-size="24" fill="#0a0a0a">ARE BEST</text>
+        <!-- Green dots on spike tips OUTSIDE the box: AI is better than we thought -->
+        <circle cx="350" cy="60" r="8" fill="#22c55e"/>
+        <circle cx="470" cy="75" r="8" fill="#22c55e"/>
+        <circle cx="555" cy="120" r="8" fill="#22c55e"/>
+        <circle cx="590" cy="200" r="8" fill="#22c55e"/>
+        <circle cx="600" cy="280" r="8" fill="#22c55e"/>
+        <circle cx="560" cy="370" r="8" fill="#22c55e"/>
+        <circle cx="500" cy="430" r="8" fill="#22c55e"/>
+        <circle cx="370" cy="445" r="8" fill="#22c55e"/>
+        <circle cx="310" cy="440" r="8" fill="#22c55e"/>
+        <circle cx="200" cy="420" r="8" fill="#22c55e"/>
+        <circle cx="130" cy="365" r="8" fill="#22c55e"/>
+        <circle cx="105" cy="245" r="8" fill="#22c55e"/>
+        <circle cx="120" cy="155" r="8" fill="#22c55e"/>
+        <circle cx="190" cy="80" r="8" fill="#22c55e"/>
+        <!-- Red dots on valley tips INSIDE the box: AI is worse than we thought -->
+        <circle cx="380" cy="160" r="8" fill="#ef4444"/>
+        <circle cx="440" cy="170" r="8" fill="#ef4444"/>
+        <circle cx="480" cy="195" r="8" fill="#ef4444"/>
+        <circle cx="480" cy="235" r="8" fill="#ef4444"/>
+        <circle cx="480" cy="285" r="8" fill="#ef4444"/>
+        <circle cx="460" cy="335" r="8" fill="#ef4444"/>
+        <circle cx="415" cy="365" r="8" fill="#ef4444"/>
+        <circle cx="350" cy="370" r="8" fill="#ef4444"/>
+        <circle cx="290" cy="350" r="8" fill="#ef4444"/>
+        <circle cx="240" cy="330" r="8" fill="#ef4444"/>
+        <circle cx="215" cy="295" r="8" fill="#ef4444"/>
+        <circle cx="215" cy="250" r="8" fill="#ef4444"/>
+        <circle cx="230" cy="200" r="8" fill="#ef4444"/>
+        <circle cx="270" cy="175" r="8" fill="#ef4444"/>
+        <!-- Legend -->
+        <circle cx="115" cy="468" r="7" fill="#22c55e"/>
+        <text x="130" y="473" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#0a0a0a">We underestimate capabilities</text>
+        <circle cx="400" cy="468" r="7" fill="#ef4444"/>
+        <text x="415" y="473" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#0a0a0a">We overestimate capabilities</text>
+    </svg>
+    <div class="slide-footer">The Zone of Interest, Arnason 2025</div>
+</section>
+
+<!-- 25: Zone of Interest — Beat 4: The zones defined -->
+<section class="slide" data-section="act4" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <svg class="reveal" viewBox="-110 0 930 500" style="width:min(90%,900px); height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#0a0a0a"/></marker>
+        </defs>
+        <!-- Layer 1: Big green box covering full jagged extent (zone of interest) -->
+        <rect x="100" y="55" width="505" height="395" fill="#66ff66"/>
+        <!-- Layer 2: Small white box (safe zone) -->
+        <rect x="295" y="200" width="110" height="100" fill="#ffffff" stroke="#0a0a0a" stroke-width="2.5"/>
+        <!-- Layer 3: The box outline, no fill (our assumption) -->
+        <rect x="200" y="100" width="300" height="300" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+        <!-- Layer 4: Jagged shape, no fill (reality) -->
+        <polygon points="350,60 380,160 470,75 440,170 555,120 480,195 590,200 480,235 600,280 480,285 560,370 460,335 500,430 415,365 370,445 350,370 310,440 290,350 200,420 240,330 130,365 215,295 105,245 215,250 120,155 230,200 190,80 270,175" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+        <!-- SAFE ZONE label (far left) -->
+        <line x1="0" y1="250" x2="290" y2="250" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <text x="-100" y="310" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#0a0a0a">SAFE ZONE</text>
+        <text x="-100" y="327" font-family="Inter,sans-serif" font-weight="600" font-size="11" fill="#0a0a0a">(Loop out the human)</text>
+        <text x="-100" y="343" font-family="Inter,sans-serif" font-size="11" fill="#0a0a0a" opacity="0.6">Where automation safely</text>
+        <text x="-100" y="359" font-family="Inter,sans-serif" font-size="11" fill="#0a0a0a" opacity="0.6">happens, agents can roam free</text>
+        <!-- ZONE OF INTEREST label (far right) -->
+        <line x1="660" y1="155" x2="475" y2="155" stroke="#0a0a0a" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <text x="660" y="85" font-family="Inter,sans-serif" font-weight="900" font-size="16" fill="#0a0a0a">ZONE OF INTEREST</text>
+        <text x="660" y="102" font-family="Inter,sans-serif" font-weight="600" font-size="11" fill="#0a0a0a">(Human in the loop)</text>
+        <text x="660" y="118" font-family="Inter,sans-serif" font-size="11" fill="#0a0a0a" opacity="0.6">Where augmentation happens,</text>
+        <text x="660" y="134" font-family="Inter,sans-serif" font-size="11" fill="#0a0a0a" opacity="0.6">where Cyborgs of Craft thrive</text>
+    </svg>
+    <div class="slide-footer">The Zone of Interest, Arnason 2025</div>
+</section>
+
+<!-- ==========================================
+     CLOSE (26-28)
+     ========================================== -->
+
+<!-- 26: Hassabis -->
+<section class="slide slide--quote" data-section="close">
+    <img src="assets/wef_logo.png" alt="WEF" style="position:absolute; top:clamp(1rem,3vw,2.5rem); left:50%; transform:translateX(-50%); height:clamp(40px,6vw,80px); opacity:0.2;">
+    <div class="quote-text reveal">Intelligence is jagged. We need to verify it with the scientific method</div>
+    <div class="attribution reveal reveal-d1">Demis Hassabis, WEF Davos 26</div>
+</section>
+
+<!-- 28: Stewart Brand -->
+<section class="slide slide--quote" data-section="close" style="background:#111;">
+    <div class="slide-bg-img dimmed" style="background-image:url('assets/steamroller_photo.png')"></div>
+    <div class="quote-mark reveal" style="z-index:1;">"</div>
+    <div class="quote-text reveal" style="z-index:1; font-size:clamp(1.8rem, 4.5vw, 4rem);">Once a new technology rolls over you, if you're not part of the steamroller, you're part of the road</div>
+    <div class="attribution reveal reveal-d1" style="z-index:1;">Stewart Brand, 1987</div>
+</section>
+
+<!-- Bonus: Two recommendations -->
+<section class="slide" data-section="close" style="background:#ffffff; padding:var(--slide-padding); align-items:center; justify-content:center;">
+    <p class="reveal" style="font-family:'Space Mono',monospace; font-size:var(--small-size); text-transform:uppercase; letter-spacing:0.15em; opacity:0.35; margin:0 0 clamp(1.5rem,3vw,2.5rem) 0;">Two things to do this week</p>
+    <p class="reveal" style="font-family:'Space Mono',monospace; font-size:var(--small-size); opacity:0.25; margin:0 0 clamp(1rem,2vw,1.5rem) 0;">This deck lives at <a href="https://bi.btrbot.com" style="color:var(--dark); text-decoration:underline;">bi.btrbot.com</a></p>
+    <div style="display:flex; flex-direction:column; gap:clamp(2rem,4vw,3.5rem); width:min(90%,700px);">
+        <div class="reveal reveal-d1">
+            <div style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; margin-bottom:0.5em;">01 READ</div>
+            <div style="font-size:var(--h2-size); font-weight:900; line-height:1.15;">The Coming Wave</div>
+            <div style="font-size:var(--body-size); opacity:0.4; margin-top:0.3em;">Mustafa Suleyman, 2023</div>
+        </div>
+        <div class="reveal reveal-d2">
+            <div style="font-family:'Space Mono',monospace; font-size:var(--small-size); color:var(--orange); font-weight:700; margin-bottom:0.5em;">02 BUILD THE MUSCLE</div>
+            <div style="font-size:var(--h2-size); font-weight:900; line-height:1.15;">Spend a weekend on this</div>
+            <div style="font-size:var(--body-size); opacity:0.4; margin-top:0.3em;"><a href="https://www.anthropic.com/learn/claude-for-you" style="color:var(--dark); text-decoration:underline;">anthropic.com/learn/claude-for-you</a> (free)</div>
+        </div>
+    </div>
+</section>
+
+<!-- 31: Closer -->
+<section class="slide slide--speaker" data-section="close">
+    <div style="font-size:var(--h2-size); font-weight:700; opacity:0.25; margin-bottom:clamp(1.5rem,4vw,3rem);" class="reveal">Thank you</div>
+    <div class="speaker-layout reveal reveal-d1">
+        <div class="speaker-qr">
+            <img src="assets/qr.png" alt="QR Code">
+        </div>
+        <div class="speaker-identity">
+            <img class="speaker-photo" src="assets/thordur_bw_on_white_photo.png" alt="Thordur Arnason">
+            <div class="speaker-name">Thordur Arnason</div>
+            <div class="speaker-role">Global Head of AI Enablement & GTM</div>
+        </div>
+    </div>
+    <img class="reveal reveal-d2" src="assets/capgemini_invent_logo.png" alt="Capgemini Invent" style="max-width:min(40%,280px); height:auto; margin-top:clamp(1.5rem,4vw,3rem); opacity:0.6;">
+</section>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const navDotsContainer = document.getElementById('navDots');
+const progressBar = document.getElementById('progress');
+const chooser = document.getElementById('chooser');
+const chooserGrid = document.getElementById('chooserGrid');
+let currentSlide = 0;
+let isNavigating = false;
+let chooserBuilt = false;
+
+// Nav dots
+slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.addEventListener('click', () => goToSlide(i));
+    navDotsContainer.appendChild(dot);
+});
+const dots = document.querySelectorAll('.nav-dot');
+
+function updateUI(index) {
+    currentSlide = index;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    progressBar.style.width = ((index + 1) / slides.length) * 100 + '%';
+}
+
+function goToSlide(index) {
+    if (index < 0 || index >= slides.length || isNavigating) return;
+    isNavigating = true;
+    slides[index].scrollIntoView({ behavior: 'smooth' });
+    updateUI(index);
+    setTimeout(() => { isNavigating = false; }, 600);
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            const index = Array.from(slides).indexOf(entry.target);
+            updateUI(index);
+        }
+    });
+}, { threshold: 0.5 });
+
+slides.forEach(s => observer.observe(s));
+
+// ── CHOOSER ──
+function buildChooser() {
+    if (chooserBuilt) return;
+    chooserGrid.innerHTML = '';
+    slides.forEach((slide, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'chooser-thumb' + (i === currentSlide ? ' current' : '');
+        // Clone slide content scaled down
+        const inner = document.createElement('div');
+        inner.className = 'chooser-thumb-inner';
+        const clone = slide.cloneNode(true);
+        clone.classList.add('visible'); // ensure reveals show
+        clone.style.width = '1920px';
+        clone.style.height = '1080px';
+        clone.style.position = 'relative';
+        clone.style.scrollSnapAlign = 'none';
+        // Remove videos to avoid heavy clones
+        clone.querySelectorAll('video').forEach(v => {
+            const placeholder = document.createElement('div');
+            placeholder.style.cssText = 'width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:3rem;';
+            placeholder.textContent = '▶';
+            v.parentNode.replaceChild(placeholder, v);
+        });
+        inner.appendChild(clone);
+        thumb.appendChild(inner);
+        // Number badge
+        const num = document.createElement('div');
+        num.className = 'chooser-thumb-num';
+        num.textContent = i + 1;
+        thumb.appendChild(num);
+        // Scale to fit
+        const resize = () => {
+            const rect = thumb.getBoundingClientRect();
+            const scale = rect.width / 1920;
+            inner.style.transform = `scale(${scale})`;
+        };
+        thumb.addEventListener('click', () => {
+            closeChooser();
+            goToSlide(i);
+        });
+        chooserGrid.appendChild(thumb);
+        requestAnimationFrame(resize);
+        window.addEventListener('resize', resize);
+    });
+    chooserBuilt = true;
+}
+
+function toggleChooser() {
+    if (chooser.classList.contains('active')) {
+        closeChooser();
+    } else {
+        buildChooser();
+        // Update current highlight
+        chooserGrid.querySelectorAll('.chooser-thumb').forEach((t, i) => {
+            t.classList.toggle('current', i === currentSlide);
+        });
+        chooser.classList.add('active');
+    }
+}
+
+function closeChooser() {
+    chooser.classList.remove('active');
+}
+
+document.getElementById('chooserClose').addEventListener('click', closeChooser);
+chooser.addEventListener('click', (e) => {
+    if (e.target === chooser) closeChooser();
+});
+
+// ── PDF DOWNLOAD (via print) ──
+function downloadPDF() {
+    // Force all slides visible for print
+    slides.forEach(s => s.classList.add('visible'));
+    window.print();
+}
+
+// ── FULLSCREEN ──
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+        document.exitFullscreen().catch(() => {});
+    }
+}
+
+// ── HOTKEYS ──
+document.addEventListener('keydown', (e) => {
+    // Ignore if typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    const chooserOpen = chooser.classList.contains('active');
+
+    if (e.key === 'c' || e.key === 'C') {
+        e.preventDefault();
+        toggleChooser();
+        return;
+    }
+    if (e.key === 'd' || e.key === 'D') {
+        e.preventDefault();
+        if (!chooserOpen) downloadPDF();
+        return;
+    }
+    if (e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        if (!chooserOpen) toggleFullscreen();
+        return;
+    }
+    if (e.key === 'Escape' && chooserOpen) {
+        e.preventDefault();
+        closeChooser();
+        return;
+    }
+
+    // Slide navigation (only when chooser closed)
+    if (!chooserOpen) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            goToSlide(currentSlide + 1);
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            goToSlide(currentSlide - 1);
+        }
+    }
+});
+</script>
+
+</body>
+</html>
